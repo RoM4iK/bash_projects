@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'yaml'
+require 'optparse'
+
+require_relative 'lib/project'
+require_relative 'lib/list_methods'
+require_relative 'lib/options'
+
+include ListMethods
+
+projects = load_list
+options = Options.parse
+
+case options[:command]
+when nil
+  if projects.size > 0
+    puts "Your projects:"
+    projects.each do |project|
+      puts project.to_s
+    end
+  else
+    puts "You have no projects yet"
+  end
+when :create
+  projects.push Project.new options[:name], options[:dir]
+  puts "Project saved"
+  save_list(projects)
+when :delete
+  if options[:id] == "all"
+    projects = []
+    puts "All projects deleted"
+  else
+    projects = projects.delete_if do |project|
+      project.id == options[:id].to_i
+    end
+    puts "Project ##{options[:id]} deleted"
+  end
+  save_list(projects)
+when :find
+  project = find_by(projects, :name, options[:name])
+  puts "No such project" unless project
+  puts project.to_s
+when :open
+  if options[:id]
+    project = find_by(projects, :id, options[:id].to_i)
+  else
+    project = find_by(projects, :name, options[:name]) unless project
+  end
+  if project
+    puts project.dir
+  else
+    puts "No such project" unless project
+  end
+end
