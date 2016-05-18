@@ -2,9 +2,8 @@
 #### Simple solution to save path to all your projects, and switch between them.
 ## Installation
 1. Clone this repository to any folder
-2. Run `chmod +x install projects`
-3. If you want to write additional functions to your `.bash_profile` run `./install`
-4. Run `sudo ln -s $PWD/projects.rb /usr/bin`
+2. If you want to write additional functions to your `.bash_profile` run `./install`
+3. Run `sudo ln -s $PWD/projects /usr/bin`
 
 ## Usage
 #### You can find all available commands by `projects -h`
