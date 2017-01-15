@@ -3,7 +3,7 @@
 ## Installation
 1. Clone this repository to any folder
 2. If you want to write additional functions to your `.bash_profile` run `./install`
-3. Run `sudo ln -s $PWD/projects /usr/bin`
+3. Run `sudo ln -s $PWD/projects /usr/local/bin`
 
 ## Usage
 #### You can find all available commands by `projects -h`
